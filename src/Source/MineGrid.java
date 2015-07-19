@@ -31,11 +31,12 @@ public class MineGrid {
 		setNeighbouringMinesNumbers();		//method to set the number of mines next to each cell for each cell
 	}
 
+	
 	/**
 	 * Method to set the number of mines around each cell for each cell in the grid
 	 */
 	private void setNeighbouringMinesNumbers() {
-		// TODO implement this method to set number of neighbouring cells
+		// TODO implement this method to set number of neighbouring mines for each cell
 		
 	}
 
