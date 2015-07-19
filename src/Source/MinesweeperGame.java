@@ -9,7 +9,7 @@ package Source;
 public class MinesweeperGame {
 
 	public static void main(String[] args) {
-		MineGrid newGrid = new MineGrid(10, 10);
+		MineGrid newGrid = new MineGrid(10, 50);
 		DisplayGrid.consolePrintGrid(newGrid);
 	}
 }

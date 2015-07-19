@@ -10,17 +10,21 @@ import java.util.Random;
 public class MineGrid {
 	
 	private MineCell[][] grid;		// 2D array for the mine sweeper grid
-	private int numMines;
+	private int numMines;			// Number of mines in the grid
 	
 	/**
 	 * Default constructor for the minesweeper grid. initiates a "beginner" grid if called
 	 */
 	public MineGrid(){
-		
+		this.numMines = 10;
+		initiateGrid(10);
+		setMines(10);
+		setNeighbouringMinesNumbers();
 	}
 	
 	/**
 	 * Constructor that initiates the grid according to the size given as the argument
+	 * 
 	 * @param size - width of the square grid for the game
 	 * @param numMines - number of mines to be put in the grid
 	 */
@@ -31,13 +35,37 @@ public class MineGrid {
 		setNeighbouringMinesNumbers();		//method to set the number of mines next to each cell for each cell
 	}
 
-	
 	/**
 	 * Method to set the number of mines around each cell for each cell in the grid
 	 */
 	private void setNeighbouringMinesNumbers() {
-		// TODO implement this method to set number of neighbouring mines for each cell
 		
+		for (int row = 0; row < grid.length; row++){
+			for (int col = 0; col < grid.length; col++){
+				
+				int mines = 0;
+				
+				if (row!=0){ 								//check the top if it is not the top row
+					if(grid[row-1][col].hasMine())
+						mines++;
+				}
+				if (row!=grid.length-1){					//check the bottom if it is not in bottom row
+					if(grid[row+1][col].hasMine())
+						mines++;
+				}
+				if (col!=0){ 								//check the left if it is not in the left column
+					if (grid[row][col-1].hasMine())
+						mines++;
+				}
+				if (col!=grid.length - 1){					//check the right if it is not in the right column
+					if (grid[row][col+1].hasMine())
+						mines++;
+				}
+				
+				//TODO check the remaining four squares
+				grid[row][col].setNeighbouringMines(mines);
+			}
+		}
 	}
 
 	/**
@@ -51,18 +79,15 @@ public class MineGrid {
 			
 			int row, column;
 			do{
-				
 			row = getRandomInt(0, grid.length - 1);				//these two variables are random number between 0 and the length of the grid
-			column = getRandomInt(0, grid.length - 1);			//and will be used to access a random cell in the grid
-			
-			if (grid[row][column].hasMine())
+			column = getRandomInt(0, grid.length - 1);			//and will be used to access a random cell in the grid			
+			if (grid[row][column].hasMine())					//check if the randomly generated cell already has a mine. if it does, generate another random position
 				continue;
 			else
 				break;
-				
 			}while(true);
 			
-			grid[row][column].setMineStatus(true);					//this cell is set to have a mine
+			grid[row][column].setMineStatus(true);				//this cell is set to have a mine
 		}
 		
 	}
@@ -87,9 +112,9 @@ public class MineGrid {
 	/**
 	 * Method to return a random integer between two numbers (inclusive)
 	 * 
-	 * @param min
-	 * @param max
-	 * @return
+	 * @param min - lower limit of the range
+	 * @param max - upper limit of the range
+	 * @return A random integer between min and max
 	 */
 	private int getRandomInt(int min, int max){
 		Random rand = new Random();
@@ -97,10 +122,10 @@ public class MineGrid {
 	    return rand.nextInt((max - min) + 1) + min;
 	}
 
-	
 	/**
-	 * Returns the width of the grid
-	 * @return
+	 * 	Method to return the width of the grid
+	 * 
+	 * @return Width of the grid
 	 */
 	public int getWidth() {
 		return grid.length;
@@ -108,7 +133,7 @@ public class MineGrid {
 
 	/**
 	 * Getter method for the number of mines in this grid
-	 * @return
+	 * @return Number of mines in the grid
 	 */
 	public int getNumMines(){
 		return this.numMines;
@@ -117,9 +142,9 @@ public class MineGrid {
 	/**
 	 * Method to return the mine cell at the given coordinates
 	 * 
-	 * @param row
-	 * @param col
-	 * @return
+	 * @param row - Row of the grid 
+	 * @param col - Column of the grid
+	 * @return a reference to a COPY of the MineCell object at the given location [row][col]
 	 */
 	public MineCell getCell(int row, int col) {
 		return new MineCell(grid[row][col]);

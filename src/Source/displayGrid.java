@@ -27,7 +27,7 @@ public class DisplayGrid {
 				if (grid.getCell(row, col).hasMine())					//if the cell has a mine print a "#" else print a "~"
 					System.out.print("#  ");
 				else
-					System.out.print("-  ");
+					System.out.print(grid.getCell(row,col).getNeighbouringMines() +  "  ");
 			}
 			System.out.println();
 		}
