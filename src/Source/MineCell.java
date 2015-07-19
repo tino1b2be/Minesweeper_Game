@@ -20,6 +20,15 @@ public class MineCell {
 	}
 
 	/**
+	 * Copy constructor for Mine Cell
+	 * @param mineCell
+	 */
+	public MineCell(MineCell mineCell) {
+		this.mineStatus = mineCell.hasMine();
+		this.numNeighbouringMines = mineCell.getNeighbouringMines();
+	}
+
+	/**
 	 * Getter method for the number of neighbouring mines next to this cell
 	 * 
 	 * @return
@@ -55,4 +64,7 @@ public class MineCell {
 		this.mineStatus = mineStatus;
 	}
 
+	public String toString(){
+		return mineStatus ? "Yes" : "NO";// + "Neighbouring Mines: " + numNeighbouringMines;
+	}
 }
