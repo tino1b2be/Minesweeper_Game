@@ -63,6 +63,27 @@ public class MineGrid {
 				}
 				
 				//TODO check the remaining four squares
+				
+				if (col!=grid.length - 1 && row!=0){				// Check top right corner is the cell is not in right column and top row
+					if (grid[row - 1][col + 1].hasMine())
+						mines++;
+				}
+				
+				if (col!=0 && row!=0){								//Check top left corner if it is not in left column and not in top row
+					if (grid[row-1][col-1].hasMine())
+						mines++;
+				}
+				
+				if (col!=grid.length - 1 && row!=grid.length-1){		//Check bottom right corner if it is not in right column and not in bottom row
+					if (grid[row + 1][col + 1].hasMine())
+						mines++;
+				}
+				
+				if (col!=0 && row!=grid.length-1){		//Check bottom left corner if it is not in left column and bottom row 
+					if (grid[row + 1][col - 1].hasMine())
+						mines++;
+				}
+				
 				grid[row][col].setNeighbouringMines(mines);
 			}
 		}

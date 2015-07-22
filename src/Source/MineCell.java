@@ -10,6 +10,7 @@ public class MineCell {
 
 	private boolean mineStatus = false;
 	private int numNeighbouringMines = 0;
+	private boolean visibility = false;
 
 	
 	/**
@@ -64,6 +65,22 @@ public class MineCell {
 		this.mineStatus = mineStatus;
 	}
 
+	/**
+	 * Method to set the visibility of the cell
+	 * @param status
+	 */
+	public void setVisibility(boolean status){
+		this.visibility = status;
+	}
+	
+	/**
+	 * Check to see if the cell is visible
+	 * @return visibility status of the cell
+	 */
+	public boolean visible(){
+		return this.visibility;
+	}
+	
 	public String toString(){
 		return mineStatus ? "Yes" : "NO";// + "Neighbouring Mines: " + numNeighbouringMines;
 	}
