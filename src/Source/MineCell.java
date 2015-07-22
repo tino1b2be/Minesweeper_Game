@@ -77,7 +77,7 @@ public class MineCell {
 	 * Check to see if the cell is visible
 	 * @return visibility status of the cell
 	 */
-	public boolean visible(){
+	public boolean isVisible(){
 		return this.visibility;
 	}
 	

@@ -42,12 +42,38 @@ public class GridUtil {
 	}
 
 	/**
-	 * Method to print the grid as it would apear for a normal gameplay
+	 * Method to print the grid as it would appear for a normal gameplay
 	 * 
 	 * @param grid - Grid to be processed and printed
 	 */
 	public static void consolePrintGame(MineGrid grid) {
 		// TODO Implement method to print the game in gameplay mode
+		String format = "%-3s";
+		
+		System.out.print("   ");
+		for (int i = 0; i < grid.getWidth(); i++){						//loop to print the column numbers
+			System.out.print(String.format(format, i));
+		}
+		System.out.println();
+		for (int row = 0; row < grid.getWidth(); row++){				//loop to print the grid contents
+			System.out.print(String.format(format, row));								//printing the row number
+			for (int col = 0; col < grid.getWidth(); col++){
+				if (grid.getCellCopy(row, col).hasMine()) {					//if the cell has a mine print a "#" else print a "."
+					System.out.print(String.format(format, "#"));
+				}
+				else if (grid.getCellCopy(row, col).isVisible() && grid.getCellCopy(row, col).getNeighbouringMines() == 0){
+					System.out.print(String.format(format, "~"));
+				}
+				else if (grid.getCellCopy(row, col).isVisible()){
+					System.out.print(String.format(format, grid.getCellCopy(row,col).getNeighbouringMines()));
+				}
+				else{
+					System.out.print(String.format(format, "."));
+				}
+			}
+			System.out.println();
+		}
+		System.out.println();
 		
 	}
 
@@ -61,6 +87,7 @@ public class GridUtil {
 	 */
 	public static void leftClick(MineGrid newGrid, int row, int col) {
 		// TODO Implement the left click for the game
+		newGrid.getCell(row, col).setVisibility(true);
 		
 	}
 }

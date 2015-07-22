@@ -62,8 +62,6 @@ public class MineGrid {
 						mines++;
 				}
 				
-				//TODO check the remaining four squares
-				
 				if (col!=grid.length - 1 && row!=0){				// Check top right corner is the cell is not in right column and top row
 					if (grid[row - 1][col + 1].hasMine())
 						mines++;
@@ -74,7 +72,7 @@ public class MineGrid {
 						mines++;
 				}
 				
-				if (col!=grid.length - 1 && row!=grid.length-1){		//Check bottom right corner if it is not in right column and not in bottom row
+				if (col!=grid.length - 1 && row!=grid.length-1){	//Check bottom right corner if it is not in right column and not in bottom row
 					if (grid[row + 1][col + 1].hasMine())
 						mines++;
 				}
@@ -167,7 +165,10 @@ public class MineGrid {
 	 * @param col - Column of the grid
 	 * @return a reference to a COPY of the MineCell object at the given location [row][col]
 	 */
-	public MineCell getCell(int row, int col) {
+	public MineCell getCellCopy(int row, int col) {
 		return new MineCell(grid[row][col]);
+	}
+	public MineCell getCell(int row, int col) {
+		return grid[row][col];
 	}
 }

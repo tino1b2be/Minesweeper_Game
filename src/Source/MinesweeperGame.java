@@ -35,7 +35,7 @@ public class MinesweeperGame {
 			int col = Integer.parseInt(input2[1]);
 			
 			GridUtil.leftClick(newGrid, row, col);
-			GridUtil.consolePrintAll(newGrid);
+			GridUtil.consolePrintGame(newGrid);
 			
 		}while(true);
 	}
