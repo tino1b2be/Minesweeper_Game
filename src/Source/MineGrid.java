@@ -9,8 +9,9 @@ import java.util.Random;
  */
 public class MineGrid {
 	
-	private MineCell[][] grid;		// 2D array for the mine sweeper grid
-	private int numMines;			// Number of mines in the grid
+	private MineCell[][] grid;				// 2D array for the mine sweeper grid
+	private int numMines;					// Number of mines in the grid
+	private boolean loseStatus = false;		// the lose status of the game
 	
 	/**
 	 * Default constructor for the minesweeper grid. initiates a "beginner" grid if called
@@ -45,19 +46,19 @@ public class MineGrid {
 				
 				int mines = 0;
 				
-				if (row!=0){ 								//check the top if it is not the top row
+				if (row!=0){ 										//check the top if it is not the top row
 					if(grid[row-1][col].hasMine())
 						mines++;
 				}
-				if (row!=grid.length-1){					//check the bottom if it is not in bottom row
+				if (row!=grid.length-1){							//check the bottom if it is not in bottom row
 					if(grid[row+1][col].hasMine())
 						mines++;
 				}
-				if (col!=0){ 								//check the left if it is not in the left column
+				if (col!=0){ 										//check the left if it is not in the left column
 					if (grid[row][col-1].hasMine())
 						mines++;
 				}
-				if (col!=grid.length - 1){					//check the right if it is not in the right column
+				if (col!=grid.length - 1){							//check the right if it is not in the right column
 					if (grid[row][col+1].hasMine())
 						mines++;
 				}
@@ -77,7 +78,7 @@ public class MineGrid {
 						mines++;
 				}
 				
-				if (col!=0 && row!=grid.length-1){		//Check bottom left corner if it is not in left column and bottom row 
+				if (col!=0 && row!=grid.length-1){					//Check bottom left corner if it is not in left column and bottom row 
 					if (grid[row + 1][col - 1].hasMine())
 						mines++;
 				}
@@ -85,7 +86,7 @@ public class MineGrid {
 				grid[row][col].setNeighbouringMines(mines);
 			}
 		}
-	}
+	}//end of set number of mines method
 
 	/**
 	 * method to put mines in random spots in the grid
@@ -97,23 +98,24 @@ public class MineGrid {
 		for (int i = 0; i < numMines; i++){
 			
 			int row, column;
+			
 			do{
+				
 			row = getRandomInt(0, grid.length - 1);				//these two variables are random number between 0 and the length of the grid
 			column = getRandomInt(0, grid.length - 1);			//and will be used to access a random cell in the grid			
 			if (grid[row][column].hasMine())					//check if the randomly generated cell already has a mine. if it does, generate another random position
 				continue;
 			else
 				break;
+			
 			}while(true);
 			
 			grid[row][column].setMineStatus(true);				//this cell is set to have a mine
 		}
-		
-	}
+	}//End of setMines method
 
 	/**
 	 * Method to create a grid with empty MineCell objects
-	 * 
 	 * @param size - width of the square grid
 	 */
 	private void initiateGrid(int size) {
@@ -143,9 +145,9 @@ public class MineGrid {
 
 	/**
 	 * 	Method to return the width of the grid
-	 * 
 	 * @return Width of the grid
 	 */
+	
 	public int getWidth() {
 		return grid.length;
 	}
@@ -168,7 +170,40 @@ public class MineGrid {
 	public MineCell getCellCopy(int row, int col) {
 		return new MineCell(grid[row][col]);
 	}
+	
+	/**
+	 * Method to return the address to a cell in the grid
+	 * 
+	 * @param row - Row of the cell
+	 * @param col - Column of the Grid
+	 * @return An address of the MineCell object in the grid (NOT A COPY), use getCellCopy() for a copy
+	 */
 	public MineCell getCell(int row, int col) {
 		return grid[row][col];
+	}
+
+	/**
+	 * Method to set the lose status of the game
+	 * @param status
+	 */
+	public void setLoseStatus(boolean status){
+		this.loseStatus = true;
+	}
+	
+	/**
+	 * Method to check if the game has lost
+	 * @return
+	 */
+	public boolean hasLost(){
+		return this.loseStatus;
+	}
+	
+	
+	/**
+	 * Method to check if the
+	 * @return
+	 */
+	public boolean hasWon() {
+		return GridUtil.checkWon(this);
 	}
 }

@@ -11,6 +11,8 @@ public class MineCell {
 	private boolean mineStatus = false;
 	private int numNeighbouringMines = 0;
 	private boolean visibility = false;
+	private boolean mineClicked = false;
+	private boolean flagged = false; //TODO
 
 	
 	/**
@@ -81,7 +83,24 @@ public class MineCell {
 		return this.visibility;
 	}
 	
+	
+	public void mineClicked(){
+		this.mineClicked = true;
+	}
+	
+	public boolean isClicked(){
+		return mineClicked;
+	}
+	
 	public String toString(){
 		return mineStatus ? "Yes" : "NO";// + "Neighbouring Mines: " + numNeighbouringMines;
+	}
+
+	public boolean isFlagged() {
+		return flagged;
+	}
+
+	public void setClicked() {
+		this.mineClicked = true;
 	}
 }
