@@ -1,3 +1,19 @@
+/** Copyright (C) 2015 Tinotenda Chemvura
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by 
+ * the Free Software Foundation; either version 2 of the License, or 
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but 
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License 
+ * for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along 
+ * with this program; if not, write to the Free Software Foundation, Inc., 
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
 package Source;
 
 /**
@@ -95,23 +111,38 @@ public class GridUtil {
 		 * (c) if the cell has no adjacent mines then recursively check and neighbouring cells
 		 * 		until you get to a cell with a number greater than one. 
 		 */
-		
-		// TODO implement (a)
-		
+				
 		if(newGrid.getCell(row, col).hasMine()){
 			newGrid.getCell(row, col).setClicked();
 			newGrid.setLoseStatus(true);
 		}
+		
+		// TODO implement (b) and (c)
+		else {
+			recursiveReveal(newGrid,row,col);
+			return;
+		}			
+	}
+	
+	/**
+	 * Method to recursively set the visibility status of cells with no neighbouring mines to true
+	 * @param newGrid Grid to be processed to reveal cells
+	 * @param col Column number
+	 * @param row Row number
+	 */
+	private static void recursiveReveal(MineGrid newGrid, int row, int col) {
+		// TODO Implement this method
+		
+		//base case, when the cell has a number, STOP and RETURN
+		if (newGrid.getCell(row, col).hasNeighbouringMines()){
+			newGrid.getCell(row, col).setClicked();
+			newGrid.getCell(row, col).setVisibility(true);
+		}
+		else // TODO this cell has no neighbouring mines, check all 8 cells around it
+		{
 			
-		// TODO implement (b)
+		}
 		
-		
-		// TODO implement (c)
-		
-		
-		//+++++++++
-		
-		newGrid.getCell(row, col).setVisibility(true);
 	}
 
 	/**
@@ -131,7 +162,7 @@ public class GridUtil {
 		 */
 		String format = "%-3s";
 		
-		System.out.print("``````-------Game Over!!!-------``````\n   ");
+		System.out.print("``````-------Game Over!!!-------``````\n\n   ");
 		for (int i = 0; i < grid.getWidth(); i++){												//loop to print the column numbers
 			System.out.print(String.format(format, i));
 		}

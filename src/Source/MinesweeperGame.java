@@ -1,3 +1,19 @@
+/** Copyright (C) 2015 Tinotenda Chemvura
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by 
+ * the Free Software Foundation; either version 2 of the License, or 
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but 
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License 
+ * for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along 
+ * with this program; if not, write to the Free Software Foundation, Inc., 
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
 package Source;
 
 import java.util.Scanner;
@@ -14,20 +30,35 @@ public class MinesweeperGame {
 		
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
-		MineGrid newGrid;
-		
-		System.out.println("Welcome to Minesweeper in the console please enter size of grid (width) and the number of mines (seperated by a comma):");
-		do{
-			
-			String[] gameSettings = sc.nextLine().split(",");
-			if (gameSettings.length == 2){
-				newGrid = new MineGrid(Integer.parseInt(gameSettings[0]), Integer.parseInt(gameSettings[0]));
-				break;
-			}
-			else{
-				System.out.println();
-			}
-		}while(true);
+		MineGrid newGrid = null;
+		String[] gameSettings;
+		if(args.length == 0){
+			System.out.println("Welcome to Minesweeper in the console please enter size of grid (width)"
+					+ " and the number of mines (seperated by a comma):");
+			do{
+				gameSettings = sc.nextLine().split(",");
+				if (gameSettings.length !=2){
+					gameSettings = new String[]{"10","10"};
+					newGrid = new MineGrid(Integer.parseInt(gameSettings[0]), Integer.parseInt(gameSettings[1]));
+					
+				}
+				if (gameSettings.length == 2){
+					newGrid = new MineGrid(Integer.parseInt(gameSettings[0]), Integer.parseInt(gameSettings[1]));
+					break;
+				}
+				else{
+					System.out.println();
+				}
+			}while(true);
+		}
+		else if (args.length == 2){
+			gameSettings = args;
+			newGrid = new MineGrid(Integer.parseInt(gameSettings[0]), Integer.parseInt(gameSettings[1]));
+		}
+		else{
+			gameSettings = new String[]{"10","10"};
+			newGrid = new MineGrid(Integer.parseInt(gameSettings[0]), Integer.parseInt(gameSettings[1]));
+		}
 		
 		GridUtil.consolePrintAll(newGrid);
 		GridUtil.consolePrintGame(newGrid);

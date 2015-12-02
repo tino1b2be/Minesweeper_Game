@@ -1,3 +1,19 @@
+/** Copyright (C) 2015 Tinotenda Chemvura
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by 
+ * the Free Software Foundation; either version 2 of the License, or 
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but 
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License 
+ * for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along 
+ * with this program; if not, write to the Free Software Foundation, Inc., 
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
 package Source;
 
 /**
@@ -9,9 +25,9 @@ package Source;
 public class MineCell {
 
 	private boolean mineStatus = false;
-	private int numNeighbouringMines = 0;
-	private boolean visibility = false;
-	private boolean mineClicked = false;
+	private int numNeighbouringMines = 0;		// Number showing the number of mines around this Cell
+	private boolean visibility = false;			// This is the visibility status of this cell
+	private boolean mineClicked = false;		
 	private boolean flagged = false; //TODO
 
 	
@@ -102,5 +118,13 @@ public class MineCell {
 
 	public void setClicked() {
 		this.mineClicked = true;
+	}
+
+	/**
+	 * Method to check if this cell has any neighbouring mines.
+	 * @return true if it has neigbouring mines
+	 */
+	public boolean hasNeighbouringMines() {
+		return numNeighbouringMines == 0;
 	}
 }
