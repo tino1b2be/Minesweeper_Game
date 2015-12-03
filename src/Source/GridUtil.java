@@ -17,13 +17,15 @@
 package Source;
 
 /**
- * Class to print the game's grid in the console
+ * Class with static Grid functions for the game
  * 
- * @author user
+ * @author Tinotenda Chemvura
  *
  */
 public class GridUtil {
-
+	/**
+	 * Default constructor
+	 */
 	public GridUtil(){}
 	
 	/**
@@ -94,7 +96,7 @@ public class GridUtil {
 	}
 
 	/**
-	 * Method to perform a left click on the grid
+	 * Method to implement a left click on the grid
 	 * 
 	 * @param newGrid - Grid to be processed
 	 * @param row - The row number in the grid
@@ -102,7 +104,6 @@ public class GridUtil {
 	 * 
 	 */
 	public static void leftClick(MineGrid newGrid, int row, int col) {
-		// TODO Implement the left click for the game
 		
 		/* Need to check: 
 		 * (a) if the cell has a mine first, if so, game is over and all mines are revealed
@@ -111,13 +112,14 @@ public class GridUtil {
 		 * (c) if the cell has no adjacent mines then recursively check and neighbouring cells
 		 * 		until you get to a cell with a number greater than one. 
 		 */
-				
+		
+		//(a)
 		if(newGrid.getCell(row, col).hasMine()){
 			newGrid.getCell(row, col).setClicked();
 			newGrid.setLoseStatus(true);
 		}
 		
-		// TODO implement (b) and (c)
+		//(b) and (c)
 		else {
 			recursiveReveal(newGrid,row,col);
 			return;
@@ -134,6 +136,8 @@ public class GridUtil {
 		// TODO Implement this method
 		MineCell cell = newGrid.getCell(row, col);
 		
+		if (cell.isClicked())
+			return;
 		cell.setVisibility(true);
 		cell.setClicked();
 		
@@ -141,8 +145,7 @@ public class GridUtil {
 		if (cell.hasNeighbouringMines()){
 			return;
 		}
-		else // TODO this cell has no neighbouring mines, check all 8 cells around it
-		{
+		else {
 			/* 1.1-if it is not in the last row
 			 *	check the cell below
 			 *

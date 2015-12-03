@@ -125,6 +125,6 @@ public class MineCell {
 	 * @return true if it has neigbouring mines
 	 */
 	public boolean hasNeighbouringMines() {
-		return numNeighbouringMines == 0;
+		return numNeighbouringMines != 0;
 	}
 }
