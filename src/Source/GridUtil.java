@@ -132,15 +132,76 @@ public class GridUtil {
 	 */
 	private static void recursiveReveal(MineGrid newGrid, int row, int col) {
 		// TODO Implement this method
+		MineCell cell = newGrid.getCell(row, col);
+		
+		cell.setVisibility(true);
+		cell.setClicked();
 		
 		//base case, when the cell has a number, STOP and RETURN
-		if (newGrid.getCell(row, col).hasNeighbouringMines()){
-			newGrid.getCell(row, col).setClicked();
-			newGrid.getCell(row, col).setVisibility(true);
+		if (cell.hasNeighbouringMines()){
+			return;
 		}
 		else // TODO this cell has no neighbouring mines, check all 8 cells around it
 		{
+			/* 1.1-if it is not in the last row
+			 *	check the cell below
+			 *
+			 * 1.2-if it is not in first col
+			 * 	check the bottom left cell
+			 *
+			 * 1.3-if it is not in last col
+			 *  check the bottom right cell
+			 *  
+			 * 2.1-if it is not in the 1st row
+			 *	check the top cell
+			 *
+			 * 2.2-if it is not in the first col
+			 * 	check the top left cell
+			 * 
+			 * 2.3-if it is not in the last col
+			 * 	check the top right cell
+			 * 
+			 * 3.1-if it is not in the 1st col
+			 * 	check left cell
+			 * 
+			 * 3.2-if it is not in the last col
+			 * 	check the right cell
+			 */
 			
+			int gridLen = newGrid.getWidth();
+			
+			//1.1
+			if (row != gridLen-1){
+				recursiveReveal(newGrid, row+1, col);
+				//1.2
+				if (col != 0){
+					recursiveReveal(newGrid, row+1, col-1);
+				}
+				//1.3
+				if (col != gridLen-1){
+					recursiveReveal(newGrid, row+1, col+1);
+				}
+			}
+			//2.1
+			if (row != 0){
+				recursiveReveal(newGrid, row-1, col);
+				//2.2
+				if (col != 0){
+					recursiveReveal(newGrid, row-1, col-1);
+				}
+				//2.3
+				if (col != gridLen-1){
+					recursiveReveal(newGrid, row-1, col+1);
+				}
+			}
+			//3.1
+			if (col != 0){
+				recursiveReveal(newGrid, row, col-1);
+			}
+			//3.2
+			if (col != gridLen-1){
+				recursiveReveal(newGrid, row, col+1);
+			}
 		}
 		
 	}
