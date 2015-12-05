@@ -133,9 +133,9 @@ public class GridUtil {
 	 * @param row Row number
 	 */
 	private static void recursiveReveal(MineGrid newGrid, int row, int col) {
-		// TODO Implement this method
 		MineCell cell = newGrid.getCell(row, col);
 		
+		//base case, if the cell has already been clicked, return
 		if (cell.isClicked())
 			return;
 		cell.setVisibility(true);
@@ -205,8 +205,7 @@ public class GridUtil {
 			if (col != gridLen-1){
 				recursiveReveal(newGrid, row, col+1);
 			}
-		}
-		
+		}		
 	}
 
 	/**
@@ -262,8 +261,15 @@ public class GridUtil {
 		System.out.println();
 	}
 
+	/**
+	 * Method to check if the Grid has "won"
+	 * @param newGrid
+	 * @return
+	 */
 	public static boolean checkWon(MineGrid newGrid) {
 		// TODO Implement method to check if the grid has won.
+		// check each cell if it has a mine, and if it does, check if it has a flag
+		// false flags have to be accounted for
 		return false;
 	}
 }

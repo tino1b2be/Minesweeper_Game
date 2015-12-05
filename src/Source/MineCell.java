@@ -99,23 +99,29 @@ public class MineCell {
 		return this.visibility;
 	}
 	
-	
-	public void mineClicked(){
-		this.mineClicked = true;
-	}
-	
+	/**
+	 * Check if the cell has been clicked
+	 * @return
+	 */
 	public boolean isClicked(){
 		return mineClicked;
 	}
 	
-	public String toString(){
-		return mineStatus ? "Yes" : "NO";// + "Neighbouring Mines: " + numNeighbouringMines;
+	public String toString(){//TODO upgrade this function
+		return mineStatus ? "Has mine." : "No mine.";// + "Neighbouring Mines: " + numNeighbouringMines;
 	}
 
+	/**
+	 * Method to check if the cell is flagged
+	 * @return
+	 */
 	public boolean isFlagged() {
 		return flagged;
 	}
 
+	/**
+	 * Method to "click"
+	 */
 	public void setClicked() {
 		this.mineClicked = true;
 	}

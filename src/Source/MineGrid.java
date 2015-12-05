@@ -213,8 +213,7 @@ public class MineGrid {
 	public boolean hasLost(){
 		return this.loseStatus;
 	}
-	
-	
+		
 	/**
 	 * Method to check if the
 	 * @return
