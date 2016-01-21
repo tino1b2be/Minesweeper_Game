@@ -1,10 +1,10 @@
-package Tests;
+package com.tino1b2be.minesweeper.tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import Source.MineGrid;
+import com.tino1b2be.minesweeper.src.MineGrid;
 
 public class MineGridTest {
 

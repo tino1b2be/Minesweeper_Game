@@ -5,4 +5,4 @@
  * @author Tinotenda Chemvura @tino1b2be
  *
  */
-package Source;
+package com.tino1b2be.minesweeper.src;

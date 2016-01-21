@@ -5,4 +5,4 @@
  * @author user
  *
  */
-package Tests;
+package com.tino1b2be.minesweeper.tests;
